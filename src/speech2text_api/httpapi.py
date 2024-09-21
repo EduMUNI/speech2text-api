@@ -2,9 +2,7 @@ import logging
 import os
 import tempfile
 
-import ga_log2
 from fastapi import FastAPI, UploadFile
-from ga_statsd_asgi import StatsdMiddleware
 from pydantic import BaseModel
 from sentry_asgi import SentryMiddleware
 from starlette.middleware.cors import CORSMiddleware
@@ -31,14 +29,8 @@ def get_app() -> FastAPI:
         debug=settings.debug_api,
         openapi_url=settings.openapi_route,
     )
-    app.add_event_handler("startup", ga_log2.init)
     app.add_middleware(CORSMiddleware, allow_origins=["*"])
     app.add_middleware(SentryMiddleware)
-    app.add_middleware(
-        StatsdMiddleware,
-        statsd_host=settings.statsd_host,
-        prefix="{}.httpapi".format(settings.statsd_prefix),
-    )
     return app
 
 

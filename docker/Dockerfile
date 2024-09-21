@@ -15,4 +15,7 @@ RUN --mount=type=secret,id=netrc,dst=/root/.netrc \
 
 COPY release.tar.gz /tmp/
 RUN pip install /tmp/release.tar.gz
-CMD ["ga-speech2text-model", "httpapi", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["speech2text-api", "httpapi", "--host", "0.0.0.0", "--port", "5000"]
+
+# This docker was built, tagged and pushed as: ghcr.io/edumuni/speech2text-api:latest
+# docker login --username stefanik12 --password <github token> ghcr.io
