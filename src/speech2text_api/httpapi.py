@@ -50,7 +50,7 @@ def index() -> HTMLResponse:
 
 
 # speech2text_wrapper = Whisper('openai/whisper-medium')  # TODO: selected model is big, pick the model below for testing
-speech2text_wrapper = Whisper('openai/whisper-tiny')
+speech2text_wrapper = Whisper(settings.model_id)
 
 
 async def create_tmp_file(file: UploadFile, output_fname: str = "input.wav") -> str:

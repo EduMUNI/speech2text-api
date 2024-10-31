@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     statsd_host: Optional[str] = None
     statsd_prefix: str = "speech2text_api"
 
+    model_id: str = "openai/whisper-tiny"
+
     class Config:
         env_file = ".env"
         env_prefix = "speech2text_api_"
